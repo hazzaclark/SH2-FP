@@ -7,6 +7,11 @@
 #ifndef SH_H
 #define SH_H
 
+// SYSTEM INCLUDES
+
+#include <stdio.h>
+#include <stdint.h>
+
 #if defined(USE_FP_ARGS)
 #define USE_FP_ARGS
 #else
@@ -62,8 +67,26 @@ typedef enum OPCODE_TYPE
     OP_BRA,
     OP_BSR,
     OP_RTS
-    
+
 } OPCODE_TYPE;
+
+typedef struct OPCODE_INFO
+{
+    union PARAMS
+    {
+        uint8_t OUTPUT;
+        uint8_t SIZE;
+        uint16_t MASK;
+    };
+
+    OPCODE_TYPE OPCODE;
+    const char* MNEMONIC;
+
+    uint8_t SIZE;
+    uint8_t FLAGS;
+    unsigned CONDITION;
+    
+} OPCODE_INFO;
 
 #endif
 #endif
