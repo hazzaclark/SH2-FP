@@ -40,6 +40,12 @@
 #else 
 #define USE_SH_OPS
 
+#define     SH_SR_T     0x00000001
+#define     SH_SR_S     0x00000002
+#define     SH_SR_I     0x000000F0
+#define     SH_SR_Q     0x00000100
+#define     SH_SR_M     0x00000200
+
 typedef enum OPCODE_TYPE
 {
     OP_INVALID,
@@ -116,6 +122,9 @@ typedef struct SH_BASE
 } SH_BASE;
 
 SH_BASE* SH_BASE_T;
+
+#define         SH_REG_N            ((OPCODE_INFO >> 8) & 15)
+#define         SH_REG_M            ((OPCODE_INFO >> 4) & 15)
 
 #endif
 #endif
