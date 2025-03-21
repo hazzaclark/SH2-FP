@@ -22,7 +22,6 @@
 #define         SH_FLAG_S           0x08
 #define         SH_FLAG_U           0x10
 
-
 #define         SH_FP_ROUND_TRUNC       0
 #define         SH_FP_ROUND_BASE        1
 #define         SH_FP_ROUND_UP          2
@@ -36,7 +35,34 @@
 #else 
 #define USE_SH_OPS
 
-
+enum OPCODE_TYPE
+{
+    OP_INVALID,
+    OP_NOP,
+    OP_ADD,
+    OP_ADDC,
+    OP_SUB,
+    OP_SUBC,
+    OP_MUL,
+    OP_MULS,
+    OP_MULU,
+    OP_SHLR,
+    OP_DT,
+    OP_CMP,
+    OP_TST,
+    OP_AND,
+    OP_OR,
+    OP_XOR,
+    OP_SHLL,
+    OP_SHLR,
+    OP_ROTL,
+    OP_ROTR,
+    OP_BF,
+    OP_BT,
+    OP_BRA,
+    OP_BSR,
+    OP_RTS
+};
 
 #endif
 #endif
