@@ -85,8 +85,35 @@ typedef struct OPCODE_INFO
     uint8_t SIZE;
     uint8_t FLAGS;
     unsigned CONDITION;
-    
+
 } OPCODE_INFO;
+
+#endif
+
+#if defined(USE_SH)
+#define USE_SH
+#else 
+#define USE_SH
+
+typedef struct SH_BASE
+{
+    uint32_t PC;
+    uint32_t PR;
+    uint32_t SR;
+    uint32_t REGISTER;
+    uint32_t EA;
+
+    // SH4 SPECIFICS
+
+    uint32_t PPC;
+    uint32_t SPC;
+    uint32_t SSR;
+    uint32_t FPSCR;
+    uint32_t FPUL;
+
+} SH_BASE;
+
+SH_BASE* SH_BASE_T;
 
 #endif
 #endif
