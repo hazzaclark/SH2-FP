@@ -12,9 +12,9 @@
 #include "sh.h"
 
 #define         SH_FP_RS_BIN(VALUE)         SH_BASE_T->FR[(VALUE)]
+#define         SH_FP_XS_BIN(VALUE)         SH_BASE_T->XR[(VALUE)]
 #define         SH_FP_RS(VALUE)             * (float *) (SH_BASE_T->FR + (VALUE))
 #define         SH_FP_RD(VALUE)             * (double *) (SH_BASE_T->FR + (VALUE))
-#define         SH_FP_XS(VALUE)             SH_BASE_T->XR[(VALUE)]
 #define         SH_FP_XFS(VALUE)            *( (float *)(SH_BASE_T->XR + (VALUE)) )
 #define         SH_FP_XFD(VALUE)            *( (double *)(SH_BASE_T->XR + (VALUE)) )
 
