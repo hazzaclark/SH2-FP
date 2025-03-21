@@ -102,6 +102,8 @@ typedef struct SH_BASE
     uint32_t SR;
     uint32_t REGISTER;
     uint32_t EA;
+    uint32_t FR[16];
+    uint32_t XR[16];
 
     // SH4 SPECIFICS
 
