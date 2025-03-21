@@ -14,7 +14,7 @@
 
 #define         SH_REG_F0           0x800
 #define         SH_REG_F_COUNT      10
-#define         SH_REG_F_LEN        SH_REG_F0 + SH_REG_F_COUNT
+#define         SH_REG_F_LEN        (SH_REG_F0 + SH_REG_F_COUNT)
 
 #define         SH_FLAG_C           0x01
 #define         SH_FLAG_V           0x02
