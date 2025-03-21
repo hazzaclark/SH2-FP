@@ -22,5 +22,21 @@
 #define         SH_FLAG_S           0x08
 #define         SH_FLAG_U           0x10
 
+
+#define         SH_FP_ROUND_TRUNC       0
+#define         SH_FP_ROUND_BASE        1
+#define         SH_FP_ROUND_UP          2
+#define         SH_FP_ROUND_DOWN        3
+#define         SH_FP_ROUND_DEFAULT     4
+
+#endif
+
+#if defined(USE_SH_OPS)
+#define USE_SH_OPS
+#else 
+#define USE_SH_OPS
+
+
+
 #endif
 #endif
