@@ -35,7 +35,7 @@
 #else 
 #define USE_SH_OPS
 
-enum OPCODE_TYPE
+typedef enum OPCODE_TYPE
 {
     OP_INVALID,
     OP_NOP,
@@ -62,7 +62,8 @@ enum OPCODE_TYPE
     OP_BRA,
     OP_BSR,
     OP_RTS
-};
+    
+} OPCODE_TYPE;
 
 #endif
 #endif
