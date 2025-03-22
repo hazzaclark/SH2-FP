@@ -8,36 +8,43 @@
 
 int main(void) 
 {
-    INIT_FPU();
+    INIT_FPU_WITH_MODE(FP_SH4);
+    
+    SH_FP_REGISTERS[0] = 1.3f;
+    SH_FP_REGISTERS[1] = 2.5f;
 
-    SH_FP_REGISTERS[0] = 1.3f; // FR0 = 1.5
-    SH_FP_REGISTERS[1] = 2.5f; // FR1 = 2.5
-
-    printf("SH-4 FPU FADD:\n");
+    printf("\n--- TESTING SH-4 NATIVE FPU MODE ---\n");
     uint16_t OPCODE = 0x0001; // REG_M = 1, REG_N = 0
-
+    
     FADD(OPCODE);
     PRINT_FPU_REGISTERS();
-
+    
     float SH4_RESULT = SH_FP_REGISTERS[0];
-
-    INIT_FPU();
-    SH_FP_REGISTERS[0] = 1.5f; // FR0 = 1.5
-    SH_FP_REGISTERS[1] = 2.5f; // FR1 = 2.5
-
-    printf("\nSH-2 FP EMULATION USING SH-4 FPU:\n");
-    SH2_FADD(OPCODE);
+    
+    INIT_FPU_WITH_MODE(FP_SH2);
+    
+    SH_FP_REGISTERS[0] = 1.3f;
+    SH_FP_REGISTERS[1] = 2.5f;
+    
+    printf("\n--- TESTING SH-2 EMULATION MODE ---\n");
+    FADD(OPCODE);
     PRINT_FPU_REGISTERS();
-
+    
     float SH2_RESULT = SH_FP_REGISTERS[0];
+    
+    printf("\n--- COMPARISON RESULTS ---\n");
+    printf("SH4: %f\n", SH4_RESULT);
+    printf("SH2: %f\n", SH2_RESULT);
+    
     if (FLOAT_EQUAL(SH2_RESULT, SH4_RESULT)) 
     {
-        printf("\nSH-2 and SH-4 ARE EQUAL.\n");
+        printf("RESULTS ARE EQUAL (WITHIN RANGE)\n");
     } 
     else 
     {
-        printf("\nSH-2 and SH-4 ARE NOT EQUAL.\n");
+        printf("RESULTS DIFFER\n");
+        printf("DIFF: %f\n", SH4_RESULT - SH2_RESULT);
     }
-
+    
     return 0;
 }
