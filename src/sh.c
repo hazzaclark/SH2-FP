@@ -9,26 +9,31 @@
 #include "sh.h"
 #include "sh_types.h"
 
-static uint32_t REG_M;
-static uint32_t REG_N;
+static bool FPU_RTS = false;
 
 // FLOATING POINT ADD FROM FLOATING REGISTER M TO N BASED OFF THE RESULT OF THE PROCEDURE REGISTER (RTS)
 
-void FADD(const uint16_t OPCODE)
+void FADD(const uint16_t OPCODE) 
 {
-    REG_M = SH_REG_M(OPCODE);
-    REG_N = SH_REG_N(OPCODE);
+    uint32_t REG_M = SH_REG_M(OPCODE);
+    uint32_t REG_N = SH_REG_N(OPCODE);
 
-    if(SH_BASE_T->FPU_RTS)
+    printf("FADD: REG_M = %u (FR%u = %f), REG_N = %u (FR%u = %f)\n",
+           REG_M, REG_M, SH_FP_RS(REG_M), REG_N, REG_N, SH_FP_RD(REG_N));
+
+    if (FPU_RTS) 
     {
-        REG_N = REG_N & 14;
-        REG_M = REG_M & 14;
+        // WHEN RTS IS TRUE, MAKE A MASK
+        
+        REG_N = REG_N & 0xE; 
+        REG_M = REG_M & 0xE; 
 
         SH_FP_RD(REG_N) = SH_FP_RD(REG_N) + SH_FP_RS(REG_M);
-    }
-
-    else
+    } 
+    else 
     {
         SH_FP_RS(REG_N) = SH_FP_RS(REG_N) + SH_FP_RS(REG_M);
     }
+
+    printf("FADD: Result in FR%u = %f\n", REG_N, SH_FP_RD(REG_N));
 }
