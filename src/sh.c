@@ -9,6 +9,7 @@
 #include "sh.h"
 #include "sh_types.h"
 
+float SH_FP_REGISTERS[16];
 static bool FPU_RTS = false;
 
 // SMALL EMULATION LAYER FOR THE SH2 WHICH TAKES THE LIKENESS OF THE BELOW 
