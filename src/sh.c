@@ -19,23 +19,7 @@ void SET_FPU_MODE(FPU_MODE MODE)
     printf("FPU MODE SET TO: %s\n", MODE == FP_SH4 ? "SH4 NATIVE" : "SH2 EMU");
 }
 
-// SMALL EMULATION LAYER FOR THE SH2 WHICH TAKES THE LIKENESS OF THE BELOW 
-// INSTEAD, THIS IS MORE CONDUCIVE OF AN ACTUAL EMULATION 
-
-void SH2_FADD(uint16_t OPCODE)
-{
-    uint32_t REG_M = SH_REG_M(OPCODE);
-    uint32_t REG_N = SH_REG_N(OPCODE);
-
-    printf("SH2_FADD: REG_M = %u (FR%u = %f), REG_N = %u (FR%u = %f)\n",
-           REG_M, REG_M, SH_FP_RS(REG_M), REG_N, REG_N, SH_FP_RD(REG_N));
-
-    SH_FP_RD(REG_N) = SH_FP_RD(REG_N) + SH_FP_RS(REG_M);
-
-    printf("SH2_FADD: Result in FR%u = %f\n", REG_N, SH_FP_RD(REG_N));
-}
-
-// FLOATING POINT ADD FROM FLOATING REGISTER M TO N BASED OFF THE RESULT OF THE PROCEDURE REGISTER (RTS)
+// FLOATING POINT ADD FROM FLOATING REGISTER M TO N
 
 void FADD(const uint16_t OPCODE) 
 {
@@ -44,22 +28,38 @@ void FADD(const uint16_t OPCODE)
 
     printf("FADD: REG_M = %u (FR%u = %f), REG_N = %u (FR%u = %f)\n",
            REG_M, REG_M, SH_FP_RS(REG_M), REG_N, REG_N, SH_FP_RD(REG_N));
-
-    if (FPU_RTS) 
+    
+    if (CURRENT_FPU_MODE == FP_SH2) 
     {
-        // WHEN RTS IS TRUE, MAKE A MASK
+        // CONVERT OPERANDS TO HANDLE PRECISION TYPES
 
-        REG_N = REG_N & 0xE; 
-        REG_M = REG_M & 0xE; 
-
-        SH_FP_RD(REG_N) = SH_FP_RD(REG_N) + SH_FP_RS(REG_M);
+        float SH2_OPERAND_N = CONVERT_TO_SH2_PRECISION(SH_FP_RD(REG_N));
+        float SH2_OPERAND_M = CONVERT_TO_SH2_PRECISION(SH_FP_RS(REG_M));        
+        float RESULT = SH2_OPERAND_N + SH2_OPERAND_M;
+        
+        RESULT = CONVERT_TO_SH2_PRECISION(RESULT);
+        
+        SH_FP_RD(REG_N) = RESULT;
+        
+        printf("SH2 FP EMULATION: FR%u = %f\n", REG_N, SH_FP_RD(REG_N));
     } 
     else 
     {
-        SH_FP_RS(REG_N) = SH_FP_RS(REG_N) + SH_FP_RS(REG_M);
+        if (FPU_RTS) 
+        {
+            // WHEN RTS IS TRUE, APPLY MASK FOR PAIRED REGISTER ACCESS
+            REG_N = REG_N & 0xE; 
+            REG_M = REG_M & 0xE; 
+            
+            SH_FP_RD(REG_N) = SH_FP_RD(REG_N) + SH_FP_RS(REG_M);
+        } 
+        else 
+        {
+            SH_FP_RS(REG_N) = SH_FP_RS(REG_N) + SH_FP_RS(REG_M);
+        }
+        
+        printf("SH4 FPU: Result in FR%u = %f\n", REG_N, SH_FP_RD(REG_N));
     }
-
-    printf("FADD: Result in FR%u = %f\n", REG_N, SH_FP_RD(REG_N));
 }
 
 ///////////////////////////////////////////////////////////
