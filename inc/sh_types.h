@@ -11,7 +11,7 @@
 
 #include "sh.h"
 
-static float SH_FP_REGISTERS[16];
+extern float SH_FP_REGISTERS[16];
 
 #define         SH_FP_RS_BIN(VALUE)         SH_BASE_T->FR[(VALUE)]
 #define         SH_FP_XS_BIN(VALUE)         SH_BASE_T->XR[(VALUE)]
@@ -37,5 +37,7 @@ void SH2_FADD(uint16_t OPCODE);
 void INIT_FPU();
 void PRINT_FPU_REGISTERS();
 bool FLOAT_EQUAL(float A, float B);
+void INIT_FPU_WITH_MODE(FPU_MODE mode);
+float CONVERT_TO_SH2_PRECISION(float value);
 
 #endif
