@@ -20,11 +20,14 @@ static float SH_FP_REGISTERS[16];
 #define         SH_FP_XFS(VALUE)            (SH_FP_REGISTERS[VALUE] + SH_BASE_T->XR)
 #define         SH_FP_XFD(VALUE)            (SH_FP_REGISTERS[VALUE] + SH_BASE_T->XR)
 
+#define         FLOAT_TOLERANCE             0.000001
+
 void FADD(const uint16_t OPCODE);
 void FSUB(const uint16_t OPCODE);
 void FMUL(const uint16_t OPCODE);
 void FDIV(const uint16_t OPCODE);
 void FMAC(const uint16_t OPCODE);
 void FSQRT(const uint16_t OPCODE);
+void SH2_FADD(uint16_t OPCODE);
 
 #endif
