@@ -22,6 +22,10 @@ extern float SH_FP_REGISTERS[16];
 
 #define         FLOAT_TOLERANCE             0.000001
 
+#define         SH2_MANTISSA_MAX_BITS       15
+#define         SH2_MIN_EXPO                0x10
+#define         SH2_MAX_EXPO                0xF0
+
 void FADD(const uint16_t OPCODE);
 void FSUB(const uint16_t OPCODE);
 void FMUL(const uint16_t OPCODE);
