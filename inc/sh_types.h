@@ -30,4 +30,12 @@ void FMAC(const uint16_t OPCODE);
 void FSQRT(const uint16_t OPCODE);
 void SH2_FADD(uint16_t OPCODE);
 
+///////////////////////////////////////////////////////////
+//                  MISC FUNCTIONS
+///////////////////////////////////////////////////////////
+
+void INIT_FPU();
+void PRINT_FPU_REGISTERS();
+bool FLOAT_EQUAL(float A, float B);
+
 #endif
