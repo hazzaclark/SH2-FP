@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 #include <math.h>
 
 #if defined(USE_FP_ARGS)
@@ -35,12 +36,12 @@
 #define         SH_FP_ROUND_DOWN        3
 #define         SH_FP_ROUND_DEFAULT     4
 
-typedef enum FP_TYPE
+typedef enum FPU_MODE
 {
     FP_SH2,
     FP_SH4
 
-} FP_TYPE;
+} FPU_MODE;
 
 #endif
 
