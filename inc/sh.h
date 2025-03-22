@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <stdbool.h>
+#include <math.h>
 
 #if defined(USE_FP_ARGS)
 #define USE_FP_ARGS
@@ -32,6 +34,13 @@
 #define         SH_FP_ROUND_UP          2
 #define         SH_FP_ROUND_DOWN        3
 #define         SH_FP_ROUND_DEFAULT     4
+
+typedef enum FP_TYPE
+{
+    FP_SH2,
+    FP_SH4
+
+} FP_TYPE;
 
 #endif
 
@@ -65,7 +74,6 @@ typedef enum OPCODE_TYPE
     OP_OR,
     OP_XOR,
     OP_SHLL,
-    OP_SHLR,
     OP_ROTL,
     OP_ROTR,
     OP_BF,
@@ -83,12 +91,12 @@ typedef struct OPCODE_INFO
         uint8_t OUTPUT;
         uint8_t SIZE;
         uint16_t MASK;
-    };
+    } PARAMS;
 
     OPCODE_TYPE OPCODE;
     const char* MNEMONIC;
 
-    uint8_t SIZE;
+    uint8_t SIZES;
     uint8_t FLAGS;
     unsigned CONDITION;
 
@@ -119,12 +127,15 @@ typedef struct SH_BASE
     uint32_t FPSCR;
     uint32_t FPUL;
 
+    int FPU_RTS;
+    int FPU_SCR;
+
 } SH_BASE;
 
 SH_BASE* SH_BASE_T;
 
-#define         SH_REG_N(OPCODE_INFO)       (((OPCODE_INFO) >> 8) & 15)
-#define         SH_REG_M(OPCODE_INFO)       (((OPCODE_INFO) >> 4) & 15)
+#define         SH_REG_N(OPCODE_INFO)       (((OPCODE_INFO) >> 4) & 15)
+#define         SH_REG_M(OPCODE_INFO)       ((OPCODE_INFO)  & 15)
 
 #endif
 #endif
