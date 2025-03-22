@@ -18,4 +18,11 @@
 #define         SH_FP_XFS(VALUE)            *( (float *)(SH_BASE_T->XR + (VALUE)) )
 #define         SH_FP_XFD(VALUE)            *( (double *)(SH_BASE_T->XR + (VALUE)) )
 
+void FADD(const uint16_t OPCODE);
+void FSUB(const uint16_t OPCODE);
+void FMUL(const uint16_t OPCODE);
+void FDIV(const uint16_t OPCODE);
+void FMAC(const uint16_t OPCODE);
+void FSQRT(const uint16_t OPCODE);
+
 #endif
