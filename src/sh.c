@@ -137,5 +137,5 @@ void PRINT_FPU_REGISTERS()
 
 bool FLOAT_EQUAL(float a, float b) 
 {
-        return fabs(a - b) < FLOAT_TOLERANCE;
+    return fabs(a - b) < FLOAT_TOLERANCE;
 }
