@@ -83,7 +83,7 @@ float CONVERT_TO_SH2_PRECISION(float VALUE)
     uint32_t BITS;
     memcpy(&BITS, &VALUE, sizeof(float));
 
-    uint32_t SIGN = BITS = SH_FP_SIGN_MASK;
+    uint32_t SIGN = BITS & SH_FP_SIGN_MASK;
     uint32_t EXPO = (BITS & SH_FP_EXPO_MASK) >> 23;
     uint32_t MANTISSA = BITS & SH_FP_MANTISSA_MASK;
 
