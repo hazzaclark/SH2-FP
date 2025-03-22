@@ -8,6 +8,8 @@
 
 int main(void) 
 {
+    // CHANGE THIS TO TEST OUT EMU MODES
+
     INIT_FPU_WITH_MODE(FP_SH4);
     
     SH_FP_REGISTERS[0] = 1.3f;
