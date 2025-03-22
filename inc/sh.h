@@ -123,8 +123,8 @@ typedef struct SH_BASE
 
 SH_BASE* SH_BASE_T;
 
-#define         SH_REG_N            ((OPCODE_INFO >> 8) & 15)
-#define         SH_REG_M            ((OPCODE_INFO >> 4) & 15)
+#define         SH_REG_N(OPCODE_INFO)       (((OPCODE_INFO) >> 8) & 15)
+#define         SH_REG_M(OPCODE_INFO)       (((OPCODE_INFO) >> 4) & 15)
 
 #endif
 #endif
