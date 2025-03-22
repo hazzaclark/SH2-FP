@@ -26,6 +26,11 @@ extern float SH_FP_REGISTERS[16];
 #define         SH2_MIN_EXPO                0x10
 #define         SH2_MAX_EXPO                0xF0
 
+#define         SH_FP_SIGN_MASK             0x80000000
+#define         SH_FP_EXPO_MASK             0x7F800000
+#define         SH_FP_MANTISSA_MASK         0x007FFFFF
+
+
 void FADD(const uint16_t OPCODE);
 void FSUB(const uint16_t OPCODE);
 void FMUL(const uint16_t OPCODE);
