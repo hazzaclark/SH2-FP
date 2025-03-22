@@ -54,3 +54,29 @@ void FADD(const uint16_t OPCODE)
 
     printf("FADD: Result in FR%u = %f\n", REG_N, SH_FP_RD(REG_N));
 }
+
+///////////////////////////////////////////////////////////
+//                  MISC FUNCTIONS
+///////////////////////////////////////////////////////////
+
+void INIT_FPU() 
+{
+    for (int i = 0; i < 16; i++) 
+    {
+        SH_FP_REGISTERS[i] = 0.0f;
+    }
+}
+
+void PRINT_FPU_REGISTERS() 
+{
+    printf("FPU REGISTERS:\n");
+    for (int i = 0; i < 16; i++) 
+    {
+        printf("FR%d: %f\n", i, SH_FP_REGISTERS[i]);
+    }
+}
+
+bool FLOAT_EQUAL(float a, float b) 
+{
+        return fabs(a - b) < FLOAT_TOLERANCE;
+}
