@@ -36,7 +36,7 @@ int main(void)
     } 
     else 
     {
-        printf("\nSH-2 and SH-4 results ARE NOT EQUAL.\n");
+        printf("\nSH-2 and SH-4 ARE NOT EQUAL.\n");
     }
 
     return 0;
