@@ -109,9 +109,8 @@ float CONVERT_TO_SH2_PRECISION(float VALUE)
     
     float RESULT;
     memcpy(&RESULT, &BITS, sizeof(float));
+    
     return RESULT;
-
-    return VALUE;
 }
 
 ///////////////////////////////////////////////////////////
